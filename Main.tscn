@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Candy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Main.gd" type="Script" id=3]
+[ext_resource path="res://HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/sounds/coins.wav" type="AudioStream" id=5]
+[ext_resource path="res://Barrier.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/sounds/explosion.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/space-fighter-loop-by-kevin-macleod-from-filmmusic-io.mp3" type="AudioStream" id=8]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 1920, 0, 0, 0, 0, 0, 1920, 1080 )
+}
+
+[node name="Main" type="Node"]
+script = ExtResource( 3 )
+Candy = ExtResource( 2 )
+Barrier = ExtResource( 6 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1920.0
+margin_bottom = 1080.0
+color = Color( 0.894118, 0.803922, 0.784314, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 112, 579 )
+
+[node name="HUD" parent="." instance=ExtResource( 4 )]
+
+[node name="BarrierTimer" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="CandyTimer" type="Timer" parent="."]
+
+[node name="StartTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="CandySound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -10.0
+
+[node name="ExplosionSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -10.0
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -10.0
+
+[node name="SpawnPath" type="Path2D" parent="."]
+curve = SubResource( 1 )
+
+[node name="SpawnLocation" type="PathFollow2D" parent="SpawnPath"]
+position = Vector2( 1920, 0 )
+rotation = 1.5708
+
+[connection signal="barrier_entered" from="Player" to="." method="_on_Player_barrier_entered"]
+[connection signal="candy_entered" from="Player" to="." method="_on_Player_candy_entered"]
+[connection signal="music_volume" from="HUD" to="." method="_on_HUD_music_volume"]
+[connection signal="start_game" from="HUD" to="." method="new_game"]
+[connection signal="timeout" from="BarrierTimer" to="." method="_on_BarrierTimer_timeout"]
+[connection signal="timeout" from="CandyTimer" to="." method="_on_CandyTimer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
