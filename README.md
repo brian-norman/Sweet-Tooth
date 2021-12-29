@@ -1,8 +1,7 @@
-[![C/C++ CI](https://github.com/godotengine/godot-git-plugin/actions/workflows/build.yml/badge.svg)](https://github.com/godotengine/godot-git-plugin/actions/workflows/build.yml)
+# Sweet Tooth Reboot
 
 ![icon](assets/candy.png)
 
-# Sweet Tooth
-The [original game repository](https://github.com/Cobresun/SweetTooth).
+The [original game](https://github.com/Cobresun/SweetTooth) was written in PyGame and pure Python, this new game is written in the Godot Engine.
 
 [itch.io page](https://brian-norman.itch.io/sweet-tooth) to go download this game!
