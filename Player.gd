@@ -18,12 +18,15 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var velocity = Vector2()
+	look_at(Vector2(position.x + 500, position.y))
 	
 	if Input.is_action_pressed("ui_down") || Input.is_key_pressed(KEY_S):
 		velocity.y += 1
+		look_at(Vector2(position.x + 500, position.y + 200))
 	
 	if Input.is_action_pressed("ui_up") || Input.is_key_pressed(KEY_W):
 		velocity.y -= 1
+		look_at(Vector2(position.x + 500, position.y - 200))
 	
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
