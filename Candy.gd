@@ -4,9 +4,9 @@ extends RigidBody2D
 export var speed = 200
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
+func explode():
+	$Sprite.visible = false
+	$Explosion.restart()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

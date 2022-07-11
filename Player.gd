@@ -42,7 +42,7 @@ func _process(delta):
 func _on_Player_body_entered(body):
 	if body.is_in_group("candy"):
 		emit_signal("candy_entered")
-		body.queue_free()
+		body.explode()
 	elif body.is_in_group("barrier"):
 		body.queue_free()
 		$AnimatedSprite.animation = "explosion"
